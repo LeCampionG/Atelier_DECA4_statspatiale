@@ -144,24 +144,15 @@ Ils sont soumis à des règles communes, homogènes et comparables à celles de 
 
 ## Calendrier et créneaux horaire (prévisionnel)
 
-12 séances de 1h30 en salle A 126 :
-- jeu. 08/01/2026 09h45
-- mercredi 21 janvier 2026 à 15h45 en salle A.126 (Remplace jeu. 15/01/2026 09h45)
-- jeu. 22/01/2026 09h45
-- jeu. 29/01/2026 09h45
-- ~~jeu. 05/02/2026 09h45~~
-- jeu. 12/02/2026 09h45
-- jeu. 26/02/2026 09h45
-- lundi 02 mars 2026 à 9h45 en salle A.118. (Remplace séance du jeudi 5 février)
-- jeu. 05/03/2026 09h45
-- jeu. 12/03/2026 09h45
-- jeu. 19/03/2026 09h45
-- jeu. 26/03/2026 09h45
-- jeu. 02/04/2026 09h45
+12 séances de 1h30 
+
+Définition en cours 
+
 
 ## Modes de validation
 
-Le module propose une évaluation reposant sur la remise de rendus intermédiaires et la production d'un rendu final.
+Le module propose une évaluation reposant sur la remise et la production d'un rendu final qui sera à remettre à l'issue de la dernière séance.
+Le support du rendu sera fourni.
 
 | Évaluation                                                              | Poids | Description                                        |
 |---------------------------|-----------------|-----------------------------|
