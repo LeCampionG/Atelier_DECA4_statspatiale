@@ -1,5 +1,5 @@
 
-**Lien vers la présentation : https://lecampiong.github.io/deca4_2026/#/title-slide** 
+**Lien vers la présentation : https://lecampiong.github.io/Atelier_DECA4_statspatiale/#/title-slide** 
 
 # Description de l’atelier
 
