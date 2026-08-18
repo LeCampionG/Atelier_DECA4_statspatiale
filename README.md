@@ -6,8 +6,8 @@
 ## Présentation
 
 <!-- TODO: -->
-Cet atelier propose une première initiation à la statistique spatiale avec R, pour commencer à appréhender dans l'analyse les effets liés à la dimension spatiale et géographique des données. Nous réaliserons un tour d’horizon des différents modèles et insisterons davantage sur ceux permettant d’étudier l’hétérogénéité spatiale des phénomènes étudiés ou comment des effets peuvent varier en fonction des lieux !
-Cette réflexion sera également l’occasion d’une introduction à la cartographie avec R (package mapsf) mais également avec les logiciels « clique-bouton » Magrit (<https://magrit.cnrs.fr/>) (en ligne) et Géoda (<https://geodacenter.github.io/>) pour représenter nos résultats.
+Cet atelier propose une première initiation à la statistique spatiale avec R, pour commencer à appréhender dans l'analyse de données les effets liés à la dimension spatiale et géographique des données. Nous réaliserons un tour d’horizon des différents modèles et insisterons davantage sur ceux permettant d’étudier l’hétérogénéité spatiale des phénomènes étudiés ou comment des effets peuvent varier en fonction des lieux !
+Cette réflexion sera également l’occasion d’une introduction à la réalisation de carte avec R (package mapsf) mais également avec les logiciels « clique-bouton » Magrit (<https://magrit.cnrs.fr/>) (en ligne) et Géoda (<https://geodacenter.github.io/>) pour représenter nos résultats.
 
 ## Contenu et validation :
 
@@ -31,6 +31,7 @@ Aucun prérequis technique n’est nécessaire (ni en statistiques, ni en R). L�
 -	Mobiliser les outils de base de la statistique spatiale (GWR, LISA)
 -	Interpréter et représenter les résultats d’une analyse de statistique spatiale sur un cas réel
 
+**Attention** cet atelier n 'est pas un atelier de cartographie des concepts essentiels comme la sémiologie graphique ne seront pas abordés.
 
 ### Descriptif général
 <!-- PRÉCISER BASE -->
@@ -48,12 +49,12 @@ Il devient ainsi possible d’étudier l’effet des voisins sur nos individus (
 -	d’observer si les relations entre variables changent selon les lieux (régression géographiquement pondérée ou GWR),
 -	et de représenter ces résultats sur des cartes claires et parlantes.
 
-Nous utiliserons pour cela le langage R ainsi que des outils simples comme Magrit, un logiciel de cartographie en ligne.
+Nous utiliserons pour cela le langage R ainsi que des outils simples comme Magrit, un logiciel de cartographie en ligne et GEODA, un logiciel dédié à l'analyse de l'autocorrélation spatiale.
 
 
 ### Format du cours et programme prévisionnel
 
-Les séances sont organisées en format atelier. Chaque séance comportera une dimension pratique, avec des temps d'application et exercices sur des cas concrets. Le module est organisé en séquences progressives : (1) installation de l’environnement de travail, (2) COmprendre l'intért de la statistique spatiale, (3) réalisation de différents types d'analyse statistique spatiale , (4) Initiation à la carto avec Magrit et (5) une ouverture vers les autres méthodes de la statistique spatiale
+Les séances sont organisées en format atelier. Chaque séance comportera une dimension pratique, avec des temps d'application et exercices sur des cas concrets. Le module est organisé en séquences progressives : (1) installation de l’environnement de travail, (2) Initiation à la carto avec Magrit et Geoda, (3) Comprendre l'intérêt de la statistique spatiale, (4) réalisation de différents types d'analyse statistique spatiale ,  et (5) une ouverture vers les autres méthodes de la statistique spatiale
 
 Bloc 1 – Mise en place & premiers pas (2 séances)  
 *Objectif : permettre à chacun·e de disposer d’un environnement de travail fonctionnel*
@@ -64,25 +65,26 @@ Bloc 1 – Mise en place & premiers pas (2 séances)
 
 Ressources : [Présentation réalisé par Hugues Pecout (UMR Géographie Cité) sur R](https://introduction-59e2f5.gitpages.huma-num.fr/#/title-slide)
 
-Bloc 2 – Pourquoi la statistique spatiale  (2 séances)  
-*Objectif : comprendre l'intéret d'utiliser la statistique spatiale*
+Bloc 2 - Initiation à Magrit (2 séances)
+*Objectif : s'initier à la réalisation de cartes à laide du logiciel clic-boutons Magrit*
 
-- Comprendre la différence entre homogénité et hétérogénéité spatiale
+- Se familiariser avec l'interface
+- Réaliser ses premières cartes
+
+Bloc 3 – Pourquoi la statistique spatiale  (2 séances)  
+*Objectif : comprendre l'intérêt d'utiliser la statistique spatiale*
+
+- Comprendre la différence entre homogénéité et hétérogénéité spatiale
 - Présenter un panorama des différentes méthodes de la statistique spatiale
 - Comprendre pourquoi la statistique classique ne gère pas correctement la donnée spatiale
 - Préparation des données pour la visualisation
 
-Bloc 3 – Visualisation de données (5 séances)  
+Bloc 4 – Visualisation de données (5 séances)  
 *Objectif : réaliser et maîtriser les principales analyses du champs de l'hétérogénéité spatiale*
 
 - Réaliser sur R une analyse des LISA
 - Réaliser 
 
-Bloc 4 - Initiation à Magrit (2 séances)
-*Objectif : s'initier à la réalisation de cartes à laide du logiciel clic-boutons Magrit*
-
-- Se familiariser avec l'interface
-- Réaliser ses premières cartes
 
 Bloc 5 - Ouverture vers les autres méthodes de la statistique spatiale (1 séances)
 *Objectif : présenter également les autres méthodes de la staistique spatiale*
@@ -105,7 +107,7 @@ Bloc 5 - Ouverture vers les autres méthodes de la statistique spatiale (1 séan
 | IRIS13_GE.shp  | Iris recalés sur les données BD TOPO® (précision 1 m) | IGN IRIS…GE® https://geoservices.ign.fr/irisge |  |
 | REGION.shp  | Nouvelles régions France métroplitaine + Corse édition 2021 | IGN ADMIN-EXPRESS-COG édition 2021 par territoire https://geoservices.ign.fr/adminexpress  | Les données de l'IGN ont été simplifiées avec [mapshaper]([https://mapshaper.org/) pour en réduire le poids, en utilisant l'algorithme *Visvalingam/weighted area* avec une valeur de 1 |
 
-Le fichier **data_marseille.csv** est le fichier qui sera proposé aux étudiants pour s'approprier le code et les méthodes présentéess. Ce fichier a été constitué à partir de données de l'INSEE. Il contient les variables suivantes (attention, toutes les variables hormis le taux de bas revenu ont été centrées-réduites) :
+Le fichier **data_marseille.csv** est le fichier qui sera proposé aux étudiants pour s'approprier le code et les méthodes présentées. Ce fichier a été constitué à partir de données de l'INSEE. Il contient les variables suivantes (attention, toutes les variables hormis le taux de bas revenu ont été centrées-réduites) :
 
 - id_IRIS : code IRIS
 - label_iris : nom de l'IRIS
@@ -156,10 +158,11 @@ Le support du rendu sera fourni.
 
 | Évaluation                                                              | Poids | Description                                        |
 |---------------------------|-----------------|-----------------------------|
+| QCM sur les notions qui auront été vues            | 7pts   | 1pt par bonne réponse -1pt par mauvaise réponse 0pt en cas d'absence de réponse |
 | Code efficient                                     | 3pts   | Un code qui se déroule sans erreur |
-| Analyses des statistiques | 10pts   | Analyse cohérentes de toutes les sorties stat des méthodes présentées             |
+| Analyses des statistiques | 5pts   | Analyse cohérentes de toutes les sorties stat des méthodes présentées             |
 | Figures                                    | 3pts   | Production des visuels pertinents avec l'analyse de données |
-| Out of the box                                     | 4pts   | Proposition d'analyse plus fine que la simple sortie stat réalisé ou usages d'autres méthodes de la stat spatiale                                       |
+| Out of the box                                     | 2pts   | Proposition d'analyse plus fine que la simple sortie stat réalisé ou usages d'autres méthodes de la stat spatiale                                       |
 
 
 
