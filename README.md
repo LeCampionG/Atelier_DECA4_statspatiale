@@ -11,7 +11,7 @@ Cette réflexion sera également l’occasion d’une introduction à la réalis
 
 ## Contenu et validation :
 
-Aucun prérequis technique n’est nécessaire (ni en statistiques, ni en R). L’atelier est pensé pour un public qui souhaite mieux comprendre les enjeux géographiques et du spatial dans l’analyse de données. Pour ce faire nous utiliserons un exemple concret visant à expliquer le prix de l’immobilier par EPCI en France Hexagonale. La validation passera par la remise d’un dossier reprenant le processus d’analyse de statistique spatiale tel qu’il aura été présenté, analyse qui se basera sur des données qui auront été fournies.
+Aucun prérequis technique n’est nécessaire (ni en statistiques, ni en R). L’atelier est pensé pour un public qui souhaite mieux comprendre les enjeux géographiques et du spatial dans l’analyse de données. Pour ce faire nous utiliserons un exemple concret visant à expliquer le prix de l’immobilier par EPCI en France Hexagonale. La validation passera par la remise d’un dossier reprenant le processus d’analyse de statistique spatiale tel qu’il aura été présenté, analyse qui pourra se baser sur des données qui auront été fournies.
 
 ## Exemple d’illustrations qui pourront être réalisées
 
@@ -27,11 +27,11 @@ Aucun prérequis technique n’est nécessaire (ni en statistiques, ni en R). L�
 ### A la fin du semestre, vous saurez
 
 -	Comprendre pourquoi et comment intégrer l’espace dans une analyse statistique
--	Utiliser R et Magrit pour produire des cartes et des statistiques spatiales
+-	Utiliser de manière basique R et Magrit pour produire des cartes et des statistiques spatiales
 -	Mobiliser les outils de base de la statistique spatiale (GWR, LISA)
 -	Interpréter et représenter les résultats d’une analyse de statistique spatiale sur un cas réel
 
-**Attention** cet atelier n 'est pas un atelier de cartographie des concepts essentiels comme la sémiologie graphique ne seront pas abordés.
+**Attention** cet atelier n 'est pas un atelier de cartographie des concepts essentiels comme la sémiologie graphique ne seront pas abordés mais au mieux évoqués.
 
 ### Descriptif général
 <!-- PRÉCISER BASE -->
@@ -96,53 +96,6 @@ Bloc 5 - Ouverture vers les autres méthodes de la statistique spatiale (1 séan
 
 <!-- TODO: raffiner les types de visualisation qui seront présentées -->
 
-## Présentation des données utilisé dans le cadre de l'atelier
-
-
-| Nom | Résumé | Source | Notes |
-|--- |--- |--- |--- |
-| data_marseille.csv | Données de pauvreté par IRIS pour Marseille (cf. détail des variables ci-dessous) | INSEE https://www.insee.fr/fr/statistiques/6049648 | Les variables explicatives ont été centrées-réduites |
-| donnees_standr.csv  | Prix médian de l'immobilier par EPCI en France métropolitaine (cf. détail des variables ci-dessous) | base Notaires de France https://www.immobilier.notaires.fr/fr/prix-immobilier | Les variables explicatives ont été centrées-réduites |
-| EPCI.shp  | EPCI France métropolitaine + Corse édition 2021 | IGN ADMIN-EXPRESS-COG édition 2021 par territoire https://geoservices.ign.fr/adminexpress | Les données de l'IGN ont été simplifiées avec [mapshaper]([https://mapshaper.org/) pour en réduire le poids, en utilisant l'algorithme *Visvalingam/weighted area* avec une valeur de 1 |
-| IRIS13_GE.shp  | Iris recalés sur les données BD TOPO® (précision 1 m) | IGN IRIS…GE® https://geoservices.ign.fr/irisge |  |
-| REGION.shp  | Nouvelles régions France métroplitaine + Corse édition 2021 | IGN ADMIN-EXPRESS-COG édition 2021 par territoire https://geoservices.ign.fr/adminexpress  | Les données de l'IGN ont été simplifiées avec [mapshaper]([https://mapshaper.org/) pour en réduire le poids, en utilisant l'algorithme *Visvalingam/weighted area* avec une valeur de 1 |
-
-Le fichier **data_marseille.csv** est le fichier qui sera proposé aux étudiants pour s'approprier le code et les méthodes présentées. Ce fichier a été constitué à partir de données de l'INSEE. Il contient les variables suivantes (attention, toutes les variables hormis le taux de bas revenu ont été centrées-réduites) :
-
-- id_IRIS : code IRIS
-- label_iris : nom de l'IRIS
-- code_insee : code INSEE de la commune
-- label_com : nom de la commune
-- tx_bas_revenu : taux de bas revenus déclarés au seuil de 60% (%) (variable DEC_TP6019 du fichier [BASE_TD_FILO_DEC_IRIS_2019.csv](https://www.insee.fr/fr/statistiques/6049648))
-- PartPop_fr : 
-- hlm_res_princ : part /personne de résidences principales HLM loué vide en 2017 (%) (variable P17_RP_LOCHLMV du fichier [base-ic-logement-2017](https://www.insee.fr/fr/statistiques/4799305))
-- unevoiture : part de ménages disposant au moins d'une voiture en 2017 (%) (variable P17_RP_VOIT1P du fichier [base-ic-logement-2017](https://www.insee.fr/fr/statistiques/4799305))
-- res120plus : part de résidences principales de 120 m2 ou plus en 2017 (%) (variable P17_RP_120M2P du fichier [base-ic-logement-2017](https://www.insee.fr/fr/statistiques/4799305))
-- masc_cadre : part d'hommes de 15 ans ou plus cadres et professions intellectuelles supérieures (%) (variable C17_H15P_CS3 du fichier [base-ic-evol-struct-pop-2017](https://www.insee.fr/fr/statistiques/4799309?sommaire=4658626))
-- fem_noncadre : part de femmes de 15 ans ou plus autres sans activité professionnelle (variable C17_F15P_CS8 du fichier [base-ic-evol-struct-pop-2017](https://www.insee.fr/fr/statistiques/4799309?sommaire=4658626))
-
-L'unité spatiale des données est l'IRIS.Cette unité spatiale a été créee par l'INSEE afin de préparer la diffusion du recensement de la population de 1999, l'INSEE avait développé un découpage du territoire en mailles de taille homogène appelées IRIS2000. Un sigle qui signifiait « Ilots Regroupés pour l'Information Statistique » et qui faisait référence à la taille visée de 2 000 habitants par maille élémentaire.
-Depuis, l'IRIS (appellation qui se substitue désormais à IRIS2000) constitue la brique de base en matière de diffusion de données infra-communales. Il doit respecter des critères géographiques et démographiques et avoir des contours identifiables sans ambigüité et stables dans le temps.
-Les communes d'au moins 10 000 habitants et une forte proportion des communes de 5 000 à 10 000 habitants sont découpées en IRIS. Ce découpage constitue une partition de leur territoire. La France compte environ 16 100 IRIS dont 650 dans les DOM.
-Par extension, afin de couvrir l'ensemble du territoire, on assimile à un IRIS chacune des communes non découpées en IRIS.
-
-Les données utilisés en présentation et en exemple ont été constitué par Frédéric Audard et Alice Ferrari à partir de la base Notaires de France. Il contient les variables suivantes (attention, toutes les variables hormis le prix médian ont été centrées-réduites) :
-
-SIREN : code SIREN de l'EPCI
-prix_med : pris médian par EPCI à la vente
-perc_log_vac : % logements vacants
-perc_maison : % maisons
-perc_tiny_log : % petits logements
-dens_pop : densité de population
-med_niveau_vis : médiane du niveau de vie
-part_log_suroccup : % logements suroccupés
-part_agri_nb_emploi : % agriculteurs
-part_cadre_profintellec_nbemploi : % cadres et professions intellectuelles
-
-Ces données sont à l'échelle de l'EPCI (établissements publics de coopération intercommunale). Les EPCI sont des structures administratives permettant à plusieurs communes d’exercer des compétences en commun.
-Ils sont soumis à des règles communes, homogènes et comparables à celles de collectivités locales. Les communautés urbaines, communautés d'agglomération, communautés de communes, syndicats d'agglomération nouvelle, syndicats de communes et les syndicats mixtes sont des EPCI.
-(source INSEE)
-
 
 ## Calendrier et créneaux horaire (prévisionnel)
 
@@ -164,6 +117,89 @@ Le support du rendu sera fourni.
 | Figures                                    | 3pts   | Production des visuels pertinents avec l'analyse de données |
 | Out of the box                                     | 2pts   | Proposition d'analyse plus fine que la simple sortie stat réalisé ou usages d'autres méthodes de la stat spatiale                                       |
 
+## Présentation des données utilisé dans le cadre de l'atelier
+
+
+| Nom | Résumé | Source | Notes |
+|--- |--- |--- |--- |
+| data_marseille.csv | Données de pauvreté par IRIS pour Marseille (cf. détail des variables ci-dessous) | INSEE https://www.insee.fr/fr/statistiques/6049648 | Les variables explicatives ont été centrées-réduites |
+| LyonIris.Rdata | Données spatiales pour l’agglomération lyonnaise (France) comprend dix variables, dont quatre environnementales (EN) et six socioéconomiques (SE) (cf. détail des variables ci-dessous) | package `geocmeans` | Fichier exporté depuis R au format Rdata |
+| covid_usa.rds | données spatiales issu de l’étude de Kaashoek et al. (2022). Dans cet article, les auteures et auteurs cherchent à déterminer quels sont les facteurs socio-économiques, politiques, et sanitaires associés avec la prévalence de décès de COVID-19 dans les différents comtés des États-Unis. | Kaashoek et al. (2022) [https://www.insee.fr/fr/statistiques/6049648](https://github.com/ctesta01/spatial_poisson_covid/tree/main) |  |
+| donnees_standr.csv  | Prix médian de l'immobilier par EPCI en France métropolitaine (cf. détail des variables ci-dessous) | base Notaires de France https://www.immobilier.notaires.fr/fr/prix-immobilier | Les variables explicatives ont été centrées-réduites |
+| EPCI.shp  | EPCI France métropolitaine + Corse édition 2021 | IGN ADMIN-EXPRESS-COG édition 2021 par territoire https://geoservices.ign.fr/adminexpress | Les données de l'IGN ont été simplifiées avec [mapshaper]([https://mapshaper.org/) pour en réduire le poids, en utilisant l'algorithme *Visvalingam/weighted area* avec une valeur de 1 |
+| IRIS13_GE.shp  | Iris recalés sur les données BD TOPO® (précision 1 m) | IGN IRIS…GE® https://geoservices.ign.fr/irisge |  |
+| REGION.shp  | Nouvelles régions France métroplitaine + Corse édition 2021 | IGN ADMIN-EXPRESS-COG édition 2021 par territoire https://geoservices.ign.fr/adminexpress  | Les données de l'IGN ont été simplifiées avec [mapshaper]([https://mapshaper.org/) pour en réduire le poids, en utilisant l'algorithme *Visvalingam/weighted area* avec une valeur de 1 |
+
+Les fichier **data_marseille.csv**, **LyonIris.Rdata** et **covid_usa.rds** seront proposé aux étudiants pour s'approprier le code et les méthodes présentées. 
+
+**data_marseille.csv** a été constitué à partir de données de l'INSEE. Il contient les variables suivantes (attention, toutes les variables hormis le taux de bas revenu ont été centrées-réduites) :
+
+- id_IRIS : code IRIS
+- label_iris : nom de l'IRIS
+- code_insee : code INSEE de la commune
+- label_com : nom de la commune
+- tx_bas_revenu : taux de bas revenus déclarés au seuil de 60% (%) (variable DEC_TP6019 du fichier [BASE_TD_FILO_DEC_IRIS_2019.csv](https://www.insee.fr/fr/statistiques/6049648))
+- PartPop_fr : 
+- hlm_res_princ : part /personne de résidences principales HLM loué vide en 2017 (%) (variable P17_RP_LOCHLMV du fichier [base-ic-logement-2017](https://www.insee.fr/fr/statistiques/4799305))
+- unevoiture : part de ménages disposant au moins d'une voiture en 2017 (%) (variable P17_RP_VOIT1P du fichier [base-ic-logement-2017](https://www.insee.fr/fr/statistiques/4799305))
+- res120plus : part de résidences principales de 120 m2 ou plus en 2017 (%) (variable P17_RP_120M2P du fichier [base-ic-logement-2017](https://www.insee.fr/fr/statistiques/4799305))
+- masc_cadre : part d'hommes de 15 ans ou plus cadres et professions intellectuelles supérieures (%) (variable C17_H15P_CS3 du fichier [base-ic-evol-struct-pop-2017](https://www.insee.fr/fr/statistiques/4799309?sommaire=4658626))
+- fem_noncadre : part de femmes de 15 ans ou plus autres sans activité professionnelle (variable C17_F15P_CS8 du fichier [base-ic-evol-struct-pop-2017](https://www.insee.fr/fr/statistiques/4799309?sommaire=4658626))
+
+**LyonIris.Rdata** est fournit dasn le package `geocmeans` développé par Jeremy Gelb et se prête bien à la réalisation de GWR, voici les différentes variables. 
+
+- Lden : Bruit routier (Lden dB(A))
+- -NO2 : Dioxyde d'azote (ug/m^3^)
+- PM25 : Particules fines (PM$_{2,5}$)
+- VegHautPrt : Canopée (%)
+- Pct0_14 : Moins de 15 ans (%)
+- Pct_65 : 65 ans et plus (%)
+- Pct_Img : Immigrants (%)
+- TxChom1564 : Taux de chômage
+- Pct_brevet : Personnes à faible scolarité (%)
+- NivVieMed : Médiane du niveau de vie (milliers d'euros)
+
+L'unité spatiale des données est l'IRIS.Cette unité spatiale a été créee par l'INSEE afin de préparer la diffusion du recensement de la population de 1999, l'INSEE avait développé un découpage du territoire en mailles de taille homogène appelées IRIS2000. Un sigle qui signifiait « Ilots Regroupés pour l'Information Statistique » et qui faisait référence à la taille visée de 2 000 habitants par maille élémentaire.
+Depuis, l'IRIS (appellation qui se substitue désormais à IRIS2000) constitue la brique de base en matière de diffusion de données infra-communales. Il doit respecter des critères géographiques et démographiques et avoir des contours identifiables sans ambigüité et stables dans le temps.
+Les communes d'au moins 10 000 habitants et une forte proportion des communes de 5 000 à 10 000 habitants sont découpées en IRIS. Ce découpage constitue une partition de leur territoire. La France compte environ 16 100 IRIS dont 650 dans les DOM.
+Par extension, afin de couvrir l'ensemble du territoire, on assimile à un IRIS chacune des communes non découpées en IRIS.
+
+
+**covid_usa.rds** est donc issue de travaux de recherche laissé en accès libre, les variables de ce jeu de données sont regroupées en trois ensembles :
+
+1- Variables socio-démographiques. L’hypothèse originale étant que dans les milieux plus défavorisés et moins éduqués, l’épidémie a fait plus de victimes. De même, les personnes âgées étaient particulièrement à risque pendant la pandémie, ainsi que les personnes fragilisées vivant dans des établissements de soin.
+        - income : niveau de revenu médian ($).
+        - per_black : pourcentage de la population étant afro-américaine.
+        - per_hispanic : pourcentage de la population étant hispanique.
+        - per_atleast_hs : part de la population disposant d’un diplôme de fin d’études secondaires.
+        - X65plus : part de la population ayant 65 ans et plus.
+        - per_nursing : part de la population vivant dans des établissements de soin.
+2- Variables politiques. L’hypothèse originale est que certains partis politiques ont moins mis en place de mesures sanitaires ce qui a eu un impact sur le nombre de décès dans les comtés. Les comportements de la population ont aussi été affectés par les orientations politiques menant à une adoption moins systématique des gestes barrières par exemple.
+        - political_leaning : niveau d’orientation politique, calculé comme la différence entre les votes républicains (votes pour Donald Trump) et les votes démocrates (votes pour Joe Biden), divisé par le total de votants. Une valeur positive indique un état avec une tendance plus républicaine et une valeur négative indique un état à tendance plus démocrate. Ces données proviennent des données électorale du New York Times de 2020.
+        - strict_p3 : niveau d’intensité de mise en place de mesures sanitaires. Il s’agit d’un score développé par le Oxford COVID-19 Government Response Tracker avec des valeurs allant de 0 (absence de mesures) à 100 (mesures les plus importantes). Ces données sont obtenues à l’échelle des États.
+3- Variables de contagion. Plusieurs facteurs expliquent la propagation de la maladie tels que la proximité aux aéroports, les niveaux de mobilité dans les comtés ou encore le port du masque.
+        - density : densité de population du comté.
+        - google_p3 : niveaux de mobilité pour le motif du travail selon les données de Google Mobility. Cet indicateur est comparatif par rapport à une tendance habituelle et est exprimé en pourcentage. Une mobilité plus importante serait associée à une moins bonne distanciation sociale entre individus de ménages différents.
+        - dist_to_airport : la distance à l’aéroport internationnal le plus proche.
+        - mask_usage_p3 : estimation de la proportion des personnes portant le masque la plupart du temps ou tout le temps en public. Ces données proviennent d’une enquête effectuée par Facebook (Facebook’s COVID-19 symptom survey).
+
+
+Les données utilisés en présentation et en exemple ont été constitué par Frédéric Audard et Alice Ferrari à partir de la base Notaires de France. Il contient les variables suivantes (attention, toutes les variables hormis le prix médian ont été centrées-réduites) :
+
+SIREN : code SIREN de l'EPCI
+prix_med : pris médian par EPCI à la vente
+perc_log_vac : % logements vacants
+perc_maison : % maisons
+perc_tiny_log : % petits logements
+dens_pop : densité de population
+med_niveau_vis : médiane du niveau de vie
+part_log_suroccup : % logements suroccupés
+part_agri_nb_emploi : % agriculteurs
+part_cadre_profintellec_nbemploi : % cadres et professions intellectuelles
+
+Ces données sont à l'échelle de l'EPCI (établissements publics de coopération intercommunale). Les EPCI sont des structures administratives permettant à plusieurs communes d’exercer des compétences en commun.
+Ils sont soumis à des règles communes, homogènes et comparables à celles de collectivités locales. Les communautés urbaines, communautés d'agglomération, communautés de communes, syndicats d'agglomération nouvelle, syndicats de communes et les syndicats mixtes sont des EPCI.
+(source INSEE)
 
 
 ### Bibliographie / Ressources
