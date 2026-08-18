@@ -168,20 +168,25 @@ Par extension, afin de couvrir l'ensemble du territoire, on assimile à un IRIS 
 **covid_usa.rds** est donc issue de travaux de recherche laissé en accès libre, les variables de ce jeu de données sont regroupées en trois ensembles :
 
 1- Variables socio-démographiques. L’hypothèse originale étant que dans les milieux plus défavorisés et moins éduqués, l’épidémie a fait plus de victimes. De même, les personnes âgées étaient particulièrement à risque pendant la pandémie, ainsi que les personnes fragilisées vivant dans des établissements de soin.
-        - income : niveau de revenu médian ($).
-        - per_black : pourcentage de la population étant afro-américaine.
-        - per_hispanic : pourcentage de la population étant hispanique.
-        - per_atleast_hs : part de la population disposant d’un diplôme de fin d’études secondaires.
-        - X65plus : part de la population ayant 65 ans et plus.
-        - per_nursing : part de la population vivant dans des établissements de soin.
+
+- income : niveau de revenu médian ($).
+- per_black : pourcentage de la population étant afro-américaine.
+- per_hispanic : pourcentage de la population étant hispanique.
+- per_atleast_hs : part de la population disposant d’un diplôme de fin d’études secondaires.
+- X65plus : part de la population ayant 65 ans et plus.
+- per_nursing : part de la population vivant dans des établissements de soin.
+
 2- Variables politiques. L’hypothèse originale est que certains partis politiques ont moins mis en place de mesures sanitaires ce qui a eu un impact sur le nombre de décès dans les comtés. Les comportements de la population ont aussi été affectés par les orientations politiques menant à une adoption moins systématique des gestes barrières par exemple.
-        - political_leaning : niveau d’orientation politique, calculé comme la différence entre les votes républicains (votes pour Donald Trump) et les votes démocrates (votes pour Joe Biden), divisé par le total de votants. Une valeur positive indique un état avec une tendance plus républicaine et une valeur négative indique un état à tendance plus démocrate. Ces données proviennent des données électorale du New York Times de 2020.
-        - strict_p3 : niveau d’intensité de mise en place de mesures sanitaires. Il s’agit d’un score développé par le Oxford COVID-19 Government Response Tracker avec des valeurs allant de 0 (absence de mesures) à 100 (mesures les plus importantes). Ces données sont obtenues à l’échelle des États.
+  
+- political_leaning : niveau d’orientation politique, calculé comme la différence entre les votes républicains (votes pour Donald Trump) et les votes démocrates (votes pour Joe Biden), divisé par le total de votants. Une valeur positive indique un état avec une tendance plus républicaine et une valeur négative indique un état à tendance plus démocrate. Ces données proviennent des données électorale du New York Times de 2020.
+- strict_p3 : niveau d’intensité de mise en place de mesures sanitaires. Il s’agit d’un score développé par le Oxford COVID-19 Government Response Tracker avec des valeurs allant de 0 (absence de mesures) à 100 (mesures les plus importantes). Ces données sont obtenues à l’échelle des États.
+  
 3- Variables de contagion. Plusieurs facteurs expliquent la propagation de la maladie tels que la proximité aux aéroports, les niveaux de mobilité dans les comtés ou encore le port du masque.
-        - density : densité de population du comté.
-        - google_p3 : niveaux de mobilité pour le motif du travail selon les données de Google Mobility. Cet indicateur est comparatif par rapport à une tendance habituelle et est exprimé en pourcentage. Une mobilité plus importante serait associée à une moins bonne distanciation sociale entre individus de ménages différents.
-        - dist_to_airport : la distance à l’aéroport internationnal le plus proche.
-        - mask_usage_p3 : estimation de la proportion des personnes portant le masque la plupart du temps ou tout le temps en public. Ces données proviennent d’une enquête effectuée par Facebook (Facebook’s COVID-19 symptom survey).
+
+- density : densité de population du comté.
+- google_p3 : niveaux de mobilité pour le motif du travail selon les données de Google Mobility. Cet indicateur est comparatif par rapport à une tendance habituelle et est exprimé en pourcentage. Une mobilité plus importante serait associée à une moins bonne distanciation sociale entre individus de ménages différents.
+- dist_to_airport : la distance à l’aéroport internationnal le plus proche.
+- mask_usage_p3 : estimation de la proportion des personnes portant le masque la plupart du temps ou tout le temps en public. Ces données proviennent d’une enquête effectuée par Facebook (Facebook’s COVID-19 symptom survey).
 
 
 Les données utilisés en présentation et en exemple ont été constitué par Frédéric Audard et Alice Ferrari à partir de la base Notaires de France. Il contient les variables suivantes (attention, toutes les variables hormis le prix médian ont été centrées-réduites) :
