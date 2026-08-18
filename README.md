@@ -191,16 +191,16 @@ Par extension, afin de couvrir l'ensemble du territoire, on assimile à un IRIS 
 
 Les données utilisés en présentation et en exemple ont été constitué par Frédéric Audard et Alice Ferrari à partir de la base Notaires de France. Il contient les variables suivantes (attention, toutes les variables hormis le prix médian ont été centrées-réduites) :
 
-SIREN : code SIREN de l'EPCI
-prix_med : pris médian par EPCI à la vente
-perc_log_vac : % logements vacants
-perc_maison : % maisons
-perc_tiny_log : % petits logements
-dens_pop : densité de population
-med_niveau_vis : médiane du niveau de vie
-part_log_suroccup : % logements suroccupés
-part_agri_nb_emploi : % agriculteurs
-part_cadre_profintellec_nbemploi : % cadres et professions intellectuelles
+- SIREN : code SIREN de l'EPCI
+- prix_med : pris médian par EPCI à la vente
+- perc_log_vac : % logements vacants
+- perc_maison : % maisons
+- perc_tiny_log : % petits logements
+- dens_pop : densité de population
+- med_niveau_vis : médiane du niveau de vie
+- part_log_suroccup : % logements suroccupés
+- part_agri_nb_emploi : % agriculteurs
+- part_cadre_profintellec_nbemploi : % cadres et professions intellectuelles
 
 Ces données sont à l'échelle de l'EPCI (établissements publics de coopération intercommunale). Les EPCI sont des structures administratives permettant à plusieurs communes d’exercer des compétences en commun.
 Ils sont soumis à des règles communes, homogènes et comparables à celles de collectivités locales. Les communautés urbaines, communautés d'agglomération, communautés de communes, syndicats d'agglomération nouvelle, syndicats de communes et les syndicats mixtes sont des EPCI.
