@@ -1,0 +1,419 @@
+---
+title: "Rendu Atelier DECA4 2026"
+subtitle: "Balade en statistique spatiale - Initiation tranquille à l’hétérogénéité spatiale"
+author: "Votre nom"
+date: today
+lang: fr
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false   # les numéros sont écrits à la main dans les titres
+    code-fold: false
+    code-tools: true
+    theme: cosmo
+execute:
+  echo: true
+  eval: false        # passer à TRUE une fois les chemins de données renseignés
+  warning: false
+  message: false
+---
+
+# Partie 1 — QCM (7 questions)
+
+::: {.callout-note appearance="simple"}
+Quatre propositions par question, **une seule** est correcte.
+
+Voici le barème : 1 point par bonne réponse, 0 point en cas de non réponse, -1 en cas de mauvaise réponse.
+
+Les corrigés sont repliés (sortie HTML ; en PDF ils apparaissent directement).
+:::
+
+### Question 1 — Hétérogénéité spatiale
+
+Qu'entend-on par **hétérogénéité spatiale** dans un modèle de régression ?
+
+- **A.** Les valeurs observées en un lieu ressemblent à celles des lieux voisins.
+- **B.** Les unités spatiales n'ont pas toutes la même superficie ni la même population.
+- **C.** Les paramètres du modèle (constante, pentes) varient selon la localisation : la relation n'est pas stationnaire dans l'espace.
+- **D.** Les données proviennent de sources différentes selon les régions, ce qui crée des ruptures de mesure.
+
+::: {.callout-warning appearance="simple"}
+Ecrire votre réponse ici : 
+:::
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**C.** L'hétérogénéité spatiale = **non-stationnarité structurelle** : la forme
+fonctionnelle ou les paramètres changent d'un endroit à l'autre.
+**A** décrit la dépendance spatiale (autocorrélation), pas l'hétérogénéité —
+les deux peuvent coexister et sont difficiles à distinguer empiriquement sur
+une coupe transversale unique. **B** relève du MAUP et de l'hétéroscédasticité
+liée à la taille des unités. **D** est un artefact de production de données.
+:::
+
+### Question 2 — Autocorrélation spatiale globale
+
+Qu'implique une autocorrélation spatiale positive :
+
+- **A.** Le voisinage joue un rôle dans la distribution du phénomène. Les entités spatiales adjacentes ne se ressemblent pas.
+- **B.** Le voisinage ne joue pas de rôle dans la distribution du phénomène.
+- **C.** Le voisinage joue un rôle dans la non stationnarité des effets étudiés.
+- **D.** Le voisinage joue un rôle dans la distribution du phénomène. Les entités spatiales adjacentes se ressemblent.
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**D.** Le voisinage joue un rôle dans la distribution du phénomène. Les entités spatiales adjacentes se ressemblent.
+:::
+
+### Question 3 — Voisinage
+
+Parmi ces propositions laquelle ne permet pas classiquement de définir un voisinage spatiale :
+
+- **A.** Contiguité de type knight.
+- **B.** Distance fixe.
+- **C.** Contiguité de type rook.
+- **D.** Distance à un nombre de voisin.
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**A.** Contiguité de type knight
+:::
+
+### Question 4 — Propriété fondamentale des LISA
+
+Selon Anselin (1995), un indicateur local d'association spatiale (LISA) pour chaque observation i :
+
+- **A.** vérifie qu'un indicateur local est statistiquement indépendant des autres.
+- **B.** mesure la contribution locale à l'autocorrélation globale.
+- **C.** a une valeur toujours comprise entre $-1$ et $+1$.
+- **D.** a une significativité qui peut être testée directement par la loi normale standard, sans précaution particulière.
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**B.** mesure la contribution locale à l'autocorrélation globale..
+**A** est précisément l'inverse de la réalité — des LISA calculés sur des
+unités voisines partagent des observations et sont donc corrélés.
+**D** en découle : d'où le recours à des **permutations conditionnelles** et à
+une correction des tests multiples (FDR, Bonferroni, ou approche de Caldas de
+Castro & Singer 2006). **C** confond avec un coefficient de corrélation.
+:::
+
+### Question 5 — Interprétation d'une carte LISA
+
+Une unité classée **Low–High** (LH) sur une carte de significativité LISA
+correspond à :
+
+- **A.** Un cluster de valeurs faibles.
+- **B.** Une valeur élevée entourée de valeurs faibles.
+- **C.** Une unité dont la valeur n'est pas significativement différente de la moyenne.
+- **D.** Une valeur faible entourée de valeurs élevées : un *outlier* spatial.
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**D.** La convention se lit **valeur de l'unité d'abord, voisinage ensuite**.
+**B** décrit le quadrant HL. LH et HL identifient des **atypies spatiales**
+(association spatiale négative locale), à distinguer des clusters HH et LL.
+Erreur courante : lire les quatre quadrants comme une typologie de niveaux
+alors qu'il s'agit d'une typologie de **régimes d'association locale**,
+conditionnelle au choix de $W$ et au seuil de pseudo-significativité.
+:::
+
+### Question 6 — Bande passante en GWR
+
+En régression géographiquement pondérée (GWR), le choix de la **bande
+passante** (*bandwidth*) :
+
+- **A.** Est fixé une fois pour toutes à la distance moyenne entre unités voisines.
+- **B.** Doit être le plus petit possible, afin de maximiser la finesse spatiale des coefficients.
+- **C.** Est optimisé par validation croisée ou minimisation de l'AICc, et arbitre entre biais et variance.
+- **D.** N'affecte que le temps de calcul, pas les résultats.
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**C.** Une bande passante large fait tendre la GWR vers l'OLS global (biais
+fort, variance faible) ; une bande étroite produit des coefficients très
+instables — c'est pourquoi **B** est faux : la « finesse » y devient du bruit.
+C'est le paramètre qui **détermine l'essentiel des résultats**, d'où
+l'obligation de rapporter la méthode de sélection, le type de noyau
+(fixe vs adaptatif) et la sensibilité des conclusions à ce choix.
+:::
+
+### Question 7 — Limites de la GWR
+
+Quelle affirmation décrit correctement une limite reconnue de la GWR
+« classique » ?
+
+- **A.** Elle suppose que toutes les variables explicatives varient à la même échelle spatiale, hypothèse levée par la MGWR (*multiscale GWR*).
+- **B.** Elle ne peut pas être appliquée à des variables de comptage ou binaires.
+- **C.** Elle élimine par construction toute autocorrélation spatiale des résidus.
+- **D.** Les tests de significativité des coefficients locaux suivent une loi de Student standard à $n-k$ degrés de liberté.
+
+::: {.callout-tip collapse="true" title="Réponse et justification"}
+**A.** La GWR standard impose une **bande passante unique** à tous les
+prédicteurs ; la MGWR (Fotheringham, Yang & Kang, 2017) en estime une par
+variable. **B** est faux (des extensions GWR Poisson et logistique existent).
+**C** est faux et dangereux : la GWR **peut** laisser des résidus autocorrélés.
+**D** est faux : l'inférence en GWR est non standard — il faut passer par les
+**degrés de liberté effectifs** (trace de la matrice chapeau), et la
+multicolinéarité locale peut rendre les coefficients ininterprétables même
+lorsqu'ils semblent significatifs.
+:::
+
+
+------------------------------------------------------------------------
+
+# Préambule
+
+### Chargement des données shapefile, GeoPackage, GeoJSON, rds, rdata
+
+Trois formats, un seul point d'entrée : `sf::st_read()`, qui s'appuie sur GDAL
+et détecte le driver à partir de l'extension.
+
+```{r}
+#| label: setup-sf
+library(sf)
+sf_use_s2(TRUE)          # géométrie sphérique pour les données en lon/lat
+```
+
+```{r}
+#| label: import-shapefile
+# --- 1. SHAPEFILE -----------------------------------------------------------
+# Rappel : un shapefile n'est pas UN fichier mais un ensemble
+# (.shp, .shx, .dbf, .prj, parfois .cpg). On pointe le .shp ; les autres
+# doivent être présents dans le même dossier.
+
+communes <- st_read("data/communes.shp", quiet = TRUE)
+
+# Problème d'encodage (accents cassés, fichiers produits sous Windows) :
+# communes <- st_read("data/communes.shp",
+#                     options = "ENCODING=WINDOWS-1252", quiet = TRUE)
+
+# Limites structurelles du format à garder en tête :
+#   - noms de champs tronqués à 10 caractères
+#   - pas de distinction fiable entre NA et 0 dans le .dbf
+#   - taille maximale ~2 Go par fichier
+```
+
+```{r}
+#| label: import-geopackage
+# --- 2. GEOPACKAGE ----------------------------------------------------------
+# Un .gpkg est une base SQLite pouvant contenir PLUSIEURS couches.
+# On inspecte AVANT de charger.
+
+st_layers("data/base.gpkg")
+
+departements <- st_read("data/base.gpkg",
+                        layer = "departements",
+                        quiet = TRUE)
+
+# Filtrage délégué à GDAL/SQLite : ne charge en mémoire que le nécessaire.
+# gironde <- st_read("data/base.gpkg",
+#                    query = "SELECT * FROM departements WHERE insee_dep = '33'")
+
+# Écriture d'une couche parmi d'autres, sans écraser le fichier :
+# st_write(communes, "data/base.gpkg", layer = "communes",
+#          append = FALSE, delete_layer = TRUE)
+```
+
+```{r}
+#| label: import-geojson
+# --- 3. GEOJSON -------------------------------------------------------------
+# Format texte, CRS théoriquement toujours EPSG:4326 (RFC 7946)
+# — mais des producteurs ne respectent pas la norme : VÉRIFIER.
+
+points <- st_read("data/points.geojson", quiet = TRUE)
+
+# Lecture directe depuis une URL / API :
+# points <- st_read("https://exemple.org/api/points.geojson", quiet = TRUE)
+```
+
+
+Formats natifs R : `.rds` et `.RData`
+
+Ces deux formats sérialisent des **objets R**, pas des données géographiques :
+ils conservent les classes, les attributs et le CRS, mais ne sont lisibles que
+par R. Ils servent à mettre en cache une étape de traitement coûteuse, jamais
+à diffuser ou archiver des données.
+
+```{r}
+#| label: import-rds
+# --- .rds : UN objet, sérialisé SANS son nom --------------------------------
+# L'objet est retourné par la fonction : l'affectation est EXPLICITE.
+# C'est ce qui rend ce format lisible et reproductible.
+
+# Chargement des données
+covid <- readRDS('data/covid_usa.rds')
+
+# On peut le nommer autrement au chargement, sans ambiguïté :
+covid_data <- readRDS("data/covid_usa.rds")
+
+# Recodage des valeurs négatives pour le nombre de décès
+covid_data$deaths_3 <- ifelse(covid_data$deaths_3 < 0, 
+                              0, 
+                              covid_data$deaths_3
+                              )
+
+# Conservation des comtés uniques
+covid_data <- covid_data %>% 
+  group_by(FIPS) %>% 
+  slice_head(n = 1)
+
+
+
+# Écriture
+saveRDS(covid_data, "data/covid_data.rds")
+
+# Compression : "gzip" (défaut, rapide), "bzip2", "xz" (plus lent, plus compact)
+saveRDS(covid_data, "data/covid_data.rds", compress = "xz")
+
+# Cas d'usage typique : mise en cache d'un calcul long (matrice de voisinage,
+# sélection de bande passante GWR...)
+# if (!file.exists("cache/bw_gwr.rds")) {
+#   bw <- GWmodel::bw.gwr(y ~ x1 + x2, data = sp_data, approach = "AICc")
+#   saveRDS(bw, "cache/bw_gwr.rds")
+# } else {
+#   bw <- readRDS("cache/bw_gwr.rds")
+# }
+```
+
+```{r}
+#| label: import-rdata
+
+# load() ne retourne PAS les données : il crée les objets dans l'environnement
+# appelant et renvoie (invisiblement) la liste de leurs noms.
+# Il écrase silencieusement tout objet portant le même nom.
+
+load("data/Lyon.Rdata")
+
+## Ajout des coordonnées X et Y dans LyonIris 
+xy <- st_coordinates(st_centroid(LyonIris))
+LyonIris$X <- xy[,1]
+LyonIris$Y <- xy[,2]                       # ce qui a réellement été chargé
+
+
+```
+
+
+### Insertion d'une image
+
+À privilégier quand aucun code n'est nécessaire : c'est plus lisible, plus
+rapide, et le chemin reste explicite dans le source.
+
+``` markdown
+![Schéma d'interprétation des quadrants LISA](figures/quadrants_lisa.png){#fig-lisa width=70%}
+```
+
+Renvoi automatique dans le texte : `@fig-lisa` produit « Figure 1 ».
+
+Deux images côte à côte :
+
+``` markdown
+::: {layout-ncol=2}
+![Moran global](figures/moran_global.png){#fig-moran}
+
+![LISA](figures/lisa_map.jpg){#fig-lisa2}
+:::
+```
+
+Insertion via un chunk R
+
+Utile quand le chemin est construit dynamiquement, ou quand l'image a été
+produite par un script en amont.
+
+```{r}
+#| label: fig-illustration
+#| fig-cap: "Schéma d'interprétation des quadrants LISA."
+#| out-width: "70%"
+#| fig-align: center
+
+knitr::include_graphics("figures/quadrants_lisa.png")
+```
+
+Plusieurs images dans un seul chunk :
+
+```{r}
+#| label: fig-serie
+#| fig-cap: "Cartes LISA pour trois seuils de significativité."
+#| fig-subcap:
+#|   - "p < 0.05"
+#|   - "p < 0.01"
+#|   - "p < 0.001"
+#| layout-ncol: 3
+
+knitr::include_graphics(c("figures/lisa_05.png",
+                          "figures/lisa_01.png",
+                          "figures/lisa_001.png"))
+```
+
+::: {.callout-warning}
+Les chemins relatifs sont résolus **par rapport au fichier .qmd**, pas au
+répertoire de travail R. Dans un projet à arborescence profonde ou un site
+Quarto multi-pages, préférer `here::here("figures", "lisa.png")` pour éviter
+les ruptures au rendu.
+:::
+
+------------------------------------------------------------------------
+
+
+# Partie 2 — Analyse statistique
+
+## Statistique descriptive
+
+
+```{r}
+
+
+
+```
+
+Texte ici : blablabla
+
+## Modèle de régression classique
+
+
+```{r}
+
+# SI vous voulez ajouter un commentaire dasn un bloc comme celui-ci précédez votre texte de ce sympbole #
+
+```
+
+Texte ici : blablabla
+
+## Vérification du modèle
+
+
+```{r}
+
+
+
+```
+
+Texte ici : blablabla
+
+## Autocorrélation spatiale
+
+
+```{r}
+
+
+```
+
+Texte ici : blablabla
+
+## GWR
+
+
+```{r}
+
+
+
+```
+
+
+Texte ici : blablabla
+
+
+------------------------------------------------------------------------
+
+# Session
+
+```{r}
+#| label: session-info
+#| eval: true
+sessionInfo()
+```
