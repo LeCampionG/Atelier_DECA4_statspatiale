@@ -111,11 +111,11 @@ Le support du rendu sera fourni.
 
 | Évaluation                                                              | Poids | Description                                        |
 |---------------------------|-----------------|-----------------------------|
-| QCM sur les notions qui auront été vues            | 7pts   | 1pt par bonne réponse -1pt par mauvaise réponse 0pt en cas d'absence de réponse |
-| Code efficient                                     | 3pts   | Un code qui se déroule sans erreur |
-| Analyses des statistiques | 5pts   | Analyse cohérentes de toutes les sorties stat des méthodes présentées             |
-| Figures                                    | 3pts   | Production des visuels pertinents avec l'analyse de données |
-| Out of the box                                     | 2pts   | Proposition d'analyse plus fine que la simple sortie stat réalisé ou usages d'autres méthodes de la stat spatiale                                       |
+| QCM sur les notions qui auront été vues   | 7pts   | 1pt par bonne réponse -1pt par mauvaise réponse 0pt en cas d'absence de réponse |
+| Code efficient                            | 3pts   | Un code qui se déroule sans erreur                                              |
+| Analyses des statistiques                 | 5pts   | Analyse cohérentes de toutes les sorties stat des méthodes présentées           |
+| Figures                                   | 3pts   | Production des visuels pertinents avec l'analyse de données                     |
+| Bonus                                     | 2pts   | Proposition d'analyse plus fine que la simple sortie stat réalisé ou usages d'autres méthodes de la stat spatiale, utilisation d'autres données que celles proposées |
 
 ## Présentation des données utilisé dans le cadre de l'atelier
 
@@ -146,7 +146,7 @@ Les fichier **data_marseille.csv**, **LyonIris.Rdata** et **covid_usa.rds** sero
 - masc_cadre : part d'hommes de 15 ans ou plus cadres et professions intellectuelles supérieures (%) (variable C17_H15P_CS3 du fichier [base-ic-evol-struct-pop-2017](https://www.insee.fr/fr/statistiques/4799309?sommaire=4658626))
 - fem_noncadre : part de femmes de 15 ans ou plus autres sans activité professionnelle (variable C17_F15P_CS8 du fichier [base-ic-evol-struct-pop-2017](https://www.insee.fr/fr/statistiques/4799309?sommaire=4658626))
 
-**LyonIris.Rdata** est fournit dasn le package `geocmeans` développé par Jeremy Gelb et se prête bien à la réalisation de GWR, voici les différentes variables. 
+**LyonIris.Rdata** est fournit dans le package `geocmeans` développé par Jeremy Gelb et se prête bien à la réalisation de GWR, voici les différentes variables. 
 
 - Lden : Bruit routier (Lden dB(A))
 - -NO2 : Dioxyde d'azote (ug/m^3^)
