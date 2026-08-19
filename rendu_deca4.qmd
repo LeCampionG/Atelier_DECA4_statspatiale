@@ -177,7 +177,7 @@ sf_use_s2(TRUE)          # géométrie sphérique pour les données en lon/lat
 # (.shp, .shx, .dbf, .prj, parfois .cpg). On pointe le .shp ; les autres
 # doivent être présents dans le même dossier.
 
-communes <- st_read("data/communes.shp", quiet = TRUE)
+iris13 <- st_read("data/IRIS13_GE.shp", quiet = TRUE)
 
 # Problème d'encodage (accents cassés, fichiers produits sous Windows) :
 # communes <- st_read("data/communes.shp",
@@ -187,6 +187,13 @@ communes <- st_read("data/communes.shp", quiet = TRUE)
 #   - noms de champs tronqués à 10 caractères
 #   - pas de distinction fiable entre NA et 0 dans le .dbf
 #   - taille maximale ~2 Go par fichier
+
+
+library(mapsf)
+
+# pour voir les données géographiques
+mf_map(x = iris13)
+
 ```
 
 ```{r}
@@ -248,11 +255,19 @@ covid_data$deaths_3 <- ifelse(covid_data$deaths_3 < 0,
                               covid_data$deaths_3
                               )
 
+library(dplyr)
+
 # Conservation des comtés uniques
 covid_data <- covid_data %>% 
   group_by(FIPS) %>% 
   slice_head(n = 1)
 
+
+
+library(mapsf)
+
+# pour voir les données géographiques
+mf_map(x = covid_data)
 
 
 # Écriture
@@ -278,7 +293,7 @@ saveRDS(covid_data, "data/covid_data.rds", compress = "xz")
 # appelant et renvoie (invisiblement) la liste de leurs noms.
 # Il écrase silencieusement tout objet portant le même nom.
 
-load("data/Lyon.Rdata")
+load("data/LyonIris.Rdata")
 
 ## Ajout des coordonnées X et Y dans LyonIris 
 xy <- st_coordinates(st_centroid(LyonIris))
@@ -286,8 +301,41 @@ LyonIris$X <- xy[,1]
 LyonIris$Y <- xy[,2]                       # ce qui a réellement été chargé
 
 
-```
 
+library(mapsf)
+
+# pour voir les données géographiques
+mf_map(x = LyonIris)
+
+```
+### Importer un csv et faire une jointure
+
+
+```{r}
+#| label: jointure_csv
+
+library(here)
+csv_path <- here("data", "data_marseille.csv")
+om_df <- read.csv2(csv_path)
+
+marseille_sf = iris13[startsWith(iris13$NOM_COM, 'Marseille'),]
+
+
+data_pauv <- merge(x = marseille_sf, y = om_df, by.x = "CODE_IRIS", by.y = "id_IRIS", all.x = TRUE)
+
+mf_map(x = data_pauv)
+mf_map(x = data_pauv[is.na(data_pauv$label_iris),], col = 'red', add = TRUE)
+
+data_pauv <- merge(x = marseille_sf, y = om_df, by.x = "CODE_IRIS", by.y = "id_IRIS")
+
+# Certaines lignes n’ont pas de valeur pour la colonne “tx_bas_revenu”. Sachant que c’est justement cette info qui nous intéresse, on ne garde que les lignes pour lesquelles cette valeur est renseignée.
+
+# Ici le filtre pour ne conserver que les lignes ayant la variable tx_bas_revenu renseignée
+data_pauv = data_pauv  %>% filter(!is.na(tx_bas_revenu))
+
+mf_map(x = data_pauv)
+
+```
 
 ### Insertion d'une image
 
@@ -295,7 +343,7 @@ LyonIris$Y <- xy[,2]                       # ce qui a réellement été chargé
 rapide, et le chemin reste explicite dans le source.
 
 ``` markdown
-![Schéma d'interprétation des quadrants LISA](figures/quadrants_lisa.png){#fig-lisa width=70%}
+![exemple 1](images/exemple1.png){#fig-lisa width=70%}
 ```
 
 Renvoi automatique dans le texte : `@fig-lisa` produit « Figure 1 ».
@@ -304,9 +352,9 @@ Deux images côte à côte :
 
 ``` markdown
 ::: {layout-ncol=2}
-![Moran global](figures/moran_global.png){#fig-moran}
+![exemple 2](images/exemple2.png){#fig-moran}
 
-![LISA](figures/lisa_map.jpg){#fig-lisa2}
+![exemple 3](images/exemple3.png){#fig-lisa2}
 :::
 ```
 
@@ -317,11 +365,11 @@ produite par un script en amont.
 
 ```{r}
 #| label: fig-illustration
-#| fig-cap: "Schéma d'interprétation des quadrants LISA."
+#| fig-cap: "Carte EPCI"
 #| out-width: "70%"
 #| fig-align: center
 
-knitr::include_graphics("figures/quadrants_lisa.png")
+knitr::include_graphics("images/carte_epci.png")
 ```
 
 Plusieurs images dans un seul chunk :
@@ -330,14 +378,14 @@ Plusieurs images dans un seul chunk :
 #| label: fig-serie
 #| fig-cap: "Cartes LISA pour trois seuils de significativité."
 #| fig-subcap:
-#|   - "p < 0.05"
-#|   - "p < 0.01"
-#|   - "p < 0.001"
+#|   - "exemple 1"
+#|   - "exemple 2"
+#|   - "exemple 3"
 #| layout-ncol: 3
 
-knitr::include_graphics(c("figures/lisa_05.png",
-                          "figures/lisa_01.png",
-                          "figures/lisa_001.png"))
+knitr::include_graphics(c("images/exemple1.png",
+                          "images/exemple2.png",
+                          "images/exemple3.png"))
 ```
 
 ::: {.callout-warning}
